@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cửa Hàng Hàng Ảo - Phong Cách Shopee</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        shopee: '#EE4D2D',
+                        'shopee-light': '#FFF5F3',
+                        'shopee-yellow': '#FFC107',
+                        neutral: '#F5F5F5',
+                    },
+                    fontFamily: {
+                        sans: ['Segoe UI', 'Roboto', 'Helvetica Neue', 'Arial', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        body { background-color: #f5f5f5; }
+        .card-shadow { box-shadow: 0 1px 2px 0 rgba(0,0,0,.1); transition: transform .1s, box-shadow .1s; }
+        .card-shadow:hover { box-shadow: 0 2px 8px rgba(0,0,0,.15); transform: translateY(-2px); }
+        .qty-btn { width: 28px; height: 28px; border: 1px solid #ccc; background: white; display: flex; align-items: center; justify-content: center; font-size: 16px; user-select: none; }
+        .qty-btn:first-child { border-radius: 4px 0 0 4px; }
+        .qty-btn:last-child { border-radius: 0 4px 4px 0; }
+        .qty-input { border: 1px solid #ccc; border-left: none; border-right: none; width: 40px; text-align: center; font-size: 14px; }
+        .price-font { font-size: 18px; font-weight: 700; color: #EE4D2D; }
+        .mini-text { font-size: 12px; color: #888; }
+    </style>
+</head>
+<body class="bg-gray-100">
+
+<!-- Header Shopee -->
+<header class="bg-shopee text-white sticky top-0 z-50 shadow-sm">
+    <div class="container mx-auto px-3">
+        <div class="flex justify-between items-center py-2">
+            <h1 class="text-xl font-bold tracking-tight">🛒 SHOP HÀNG ẢO</h1>
+            <nav class="hidden md:flex gap-5 text-sm font-medium">
+                <a href="#danhsach" class="hover:text-shopee-yellow">Sản phẩm</a>
+                <a href="#dangban" class="hover:text-shopee-yellow">Đăng bán</a>
+                <a href="#" class="hover:text-shopee-yellow">Thông báo</a>
+                <a href="#lienhe" class="hover:text-shopee-yellow">Hỗ trợ</a>
+            </nav>
+            <div class="flex items-center gap-3 text-sm">
+                <span class="hidden sm:inline bg-white/20 px-2 py-0.5 rounded">5% phí</span>
+                <i class="fa fa-shopping-cart text-lg cursor-pointer hover:text-shopee-yellow"></i>
+            </div>
+        </div>
+        <!-- Thanh tìm kiếm -->
+        <div class="pb-3">
+            <div class="bg-white rounded flex items-center overflow-hidden">
+                <input type="text" placeholder="Tìm sản phẩm..." class="flex-1 px-4 py-1.5 text-gray-800 outline-none">
+                <button class="bg-shopee-yellow text-gray-800 px-5 py-1.5 font-semibold text-sm">
+                    <i class="fa fa-search"></i> Tìm
+                </button>
+            </div>
+        </div>
+    </div>
+</header>
+
+<main class="container mx-auto px-3 py-5 max-w-6xl">
+
+    <!-- Bảng quản lý/đăng tin -->
+    <section id="dangban" class="mb-8 bg-white p-4 md:p-6 rounded card-shadow">
+        <h2 class="text-lg font-bold mb-5 flex items-center gap-2 text-shopee">📤 ĐĂNG SẢN PHẨM MỚI</h2>
+
+        <form id="formThem" class="grid md:grid-cols-2 gap-x-6 gap-y-4">
+            <!-- Ảnh + Video -->
+            <div>
+                <label class="block text-sm font-semibold mb-1">🖼️ Link Hình Ảnh</label>
+                <input type="text" id="hinh" class="w-full border p-2.5 rounded text-sm mb-3" placeholder="Dán link ảnh đẹp...">
+                
+                <label class="block text-sm font-semibold mb-1">🎬 Link Video (nếu có)</label>
+                <input type="text" id="video" class="w-full border p-2.5 rounded text-sm" placeholder="Giới thiệu sản phẩm...">
+            </div>
+
+            <!-- Thông tin chi tiết -->
+            <div class="space-y-3">
+                <div>
+                    <label class="block text-sm font-semibold mb-1">Tên sản phẩm</label>
+                    <input type="text" id="ten" class="w-full border p-2.5 rounded" placeholder="VD: Tài khoản / Vật phẩm / Dịch vụ...">
+                </div>
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-sm font-semibold mb-1">Kích thước/Thông số</label>
+                        <input type="text" id="kichthuoc" class="w-full border p-2.5 rounded" placeholder="Loại/Hạng...">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold mb-1">Tồn kho</label>
+                        <input type="number" min="1" id="soluong_kho" class="w-full border p-2.5 rounded" value="10">
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-sm font-semibold mb-1">Giá bán (VNĐ)</label>
+                    <input type="number" id="gia" class="w-full border p-2.5 rounded" placeholder="Giá gốc">
+                    <p class="mini-text mt-1">💡 Bạn nhận <b>95%</b> giá trị, hệ thống giữ 5% phí dịch vụ</p>
+                </div>
+            </div>
+            
+            <div class="md:col-span-2 pt-2">
+                <button type="submit" class="w-full md:w-auto bg-shopee hover:bg-red-600 text-white font-semibold px-10 py-2.5 rounded transition">
+                    ✅ Đăng Bán Ngay
+                </button>
+            </div>
+        </form>
+    </section>
+
+    <!-- DANH SÁCH SẢN PHẨM KIỂU SHOPEE -->
+    <section id="danhsach">
+        <h2 class="text-lg font-bold mb-4">🔥 Tất Cả Sản Phẩm</h2>
+        <div id="danhSachSP" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-4">
+            <p class="col-span-full text-center py-10 text-gray-400 bg-white rounded">Chưa có sản phẩm • Hãy đăng tin ở trên ↑</p>
+        </div>
+    </section>
+
+    <!-- Hỗ trợ -->
+    <section id="lienhe" class="mt-10 bg-white p-5 rounded card-shadow">
+        <h3 class="font-semibold mb-2">💬 Trung Tâm Hỗ Trợ</h3>
+        <p class="text-sm text-gray-600">Giao dịch nhanh chóng • An toàn • Chính sách rõ ràng • Phí nền tảng cố định 5%</p>
+    </section>
+</main>
+
+<footer class="bg-white border-t mt-10 py-8 text-center text-gray-500 text-sm">
+    <p class="font-semibold text-shopee mb-1">CỬA HÀNG HÀNG ẢO - GIỐNG TRẢI NGHIỆM SHOPEE</p>
+    <p>© 2026 | Nền tảng an toàn & minh bạch</p>
+</footer>
+
+<script>
+let dsSanPham = [];
+
+document.getElementById('formThem').addEventListener('submit', e => {
+    e.preventDefault();
+    const sp = {
+        id: Date.now(),
+        hinh: document.getElementById('hinh').value.trim() || 'https://via.placeholder.com/400x400?Ảnh+Sản+Phẩm',
+        video: document.getElementById('video').value.trim() || null,
+        ten: document.getElementById('ten').value.trim(),
+        kichthuoc: document.getElementById('kichthuoc').value.trim() || 'Tiêu chuẩn',
+        gia: Number(document.getElementById('gia').value),
+        soLuongKho: Number(document.getElementById('soluong_kho').value)
+    };
+    if (!sp.ten || !sp.gia || sp.soLuongKho < 1) return alert("⚠️ Nhập đủ thông tin!");
+    
+    dsSanPham.unshift(sp);
+    capNhat();
+    e.target.reset();
+});
+
+// Thay đổi số lượng
+function sl(id, buoc) {
+    const span = document.getElementById(`qty-${id}`);
+    const sp = dsSanPham.find(x => x.id === id);
+    let val = parseInt(span.textContent) + buoc;
+    if (val < 1) val = 1;
+    if (val > sp.soLuongKho) val = sp.soLuongKho;
+    span.textContent = val;
+}
+
+function capNhat(){
+    const html = !dsSanPham.length ? 
+        `<p class="col-span-full text-center py-10 bg-white text-gray-400">Chưa có sản phẩm</p>` :
+        dsSanPham.map(sp => `
+        <div class="bg-white rounded overflow-hidden card-shadow flex flex-col">
+            <!-- Ảnh -->
+            <div class="aspect-square bg-gray-50 overflow-hidden">
+                <img src="${sp.hinh}" alt="${sp.ten}" class="w-full h-full object-cover hover:scale-105 transition duration-300">
+            </div>
+            <!-- Nội dung -->
+            <div class="p-3 flex flex-col flex-grow">
+                <h3 class="text-sm leading-snug mb-2 line-clamp-2 h-10 overflow-hidden">${sp.ten}</h3>
+                <p class="mini-text text-gray-500 mb-1">${sp.kichthuoc}</p>
+                <p class="mini-text text-orange-500 mb-2">📦 Tồn: <b>${sp.soLuongKho}</b></p>
+                
+                <div class="border-t pt-2 mt-auto">
+                    <div class="price-font">${sp.gia.toLocaleString()} ₫</div>
+                    <p class="text-xs text-green-600 -mt-1 mb-2">Nhận: ~${Math.round(sp.gia*0.95).toLocaleString()}</p>
+                    
+                    <div class="flex justify-between items-center gap-1 mt-2">
+                        <div class="flex items-center">
+                            <button onclick="sl(${sp.id},-1)" class="qty-btn">-</button>
+                            <span id="qty-${sp.id}" class="qty-input">1</span>
+                            <button onclick="sl(${sp.id},+1)" class="qty-btn">+</button>
+                        </div>
+                        <button class="bg-shopee hover:bg-red-600 text-white text-xs px-3 py-1.5 rounded font-semibold">Mua</button>
+                    </div>
+                </div>
+            </div>
+        </div>`).join('');
+    document.getElementById('danhSachSP').innerHTML = html;
+}
+
+document.querySelectorAll('a[href^="#"]').forEach(a => a.onclick = e => {
+    e.preventDefault(); document.querySelector(a.getAttribute('href')).scrollIntoView({behavior:'smooth'});
+})
+</script>
+</body>
+  </html>
+  
